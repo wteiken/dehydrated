@@ -1106,7 +1106,7 @@ extract_altnames() {
 
 # Get last issuer CN in certificate chain
 get_last_cn() {
-  <<<"${1}" _sed 'H;/-----BEGIN CERTIFICATE-----/h;$!d;x' | "${OPENSSL}" x509 -noout -issuer | head -n1 | _sed -e 's/.*[ /]CN ?= ?([^/,]*).*/\1/'
+  <<<"${1}" _sed 'H;/-----BEGIN CERTIFICATE-----/h;$!d;x' | "${OPENSSL}" x509 -noout -issuer 2>/dev/null| head -n1 | _sed -e 's/.*[ /]CN ?= ?([^/,]*).*/\1/'
 }
 
 # Create certificate for domain(s) and outputs it FD 3
